@@ -38,7 +38,7 @@ namespace Common
 			{
 				// 여기도 만약 타입이 query 라면 굳이 SELECT * FROM 을 붙일 필요가 있는가?
 				// 하지만, WHERE 절 변환 부분이 걸림
-				_sb.Append("SELECT * FROM(");
+				_sb.Append("SELECT * FROM (");
 				this.Visit(m.Arguments[0]); // TODO: 이 부분을 어트리뷰트의 컨텐츠를 불러오도록...
 				_sb.Append(") AS T WHERE ");
 

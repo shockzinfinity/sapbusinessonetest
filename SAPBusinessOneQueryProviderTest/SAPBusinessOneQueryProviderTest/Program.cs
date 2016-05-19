@@ -29,7 +29,11 @@ namespace SAPBusinessOneQueryProviderTest
 			//IQueryable<OHEM> query = ohems.Where(x => x.lastName == "이");
 			// TEST
 			//IQueryable<OHEM> query = ohems.Where(x => x.sung == "이");
-			IQueryable<EmployeeInfo> query = employeeInfos.Where(x => x.sung == "이");
+
+			// Evaluator 추가로 인해 where statement 상의 상수부분을 변수로 교체가능
+			//IQueryable<EmployeeInfo> query = employeeInfos.Where(x => x.sung == "이");
+			string filterLastNames = "이";
+			IQueryable<EmployeeInfo> query = employeeInfos.Where(x => x.sung == filterLastNames);
 
 			Console.WriteLine("Query:\n{0}\n", query);
 

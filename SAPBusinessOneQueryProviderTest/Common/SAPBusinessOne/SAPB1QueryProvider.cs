@@ -32,6 +32,9 @@ namespace Common
 
 		private string Translate(Expression expression)
 		{
+			// Evaluator 추가로 인해, expression tree 상의 변수 부분을 대체
+			expression = Evaluator.PartialEval(expression);
+
 			return new SAPB1QueryTranslator().Translate(expression);
 		}
 	}

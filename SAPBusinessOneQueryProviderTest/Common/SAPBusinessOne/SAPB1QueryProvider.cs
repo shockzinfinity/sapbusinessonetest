@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Data.Common;
 using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Common
 {
-	// TODO: 레코드 셋을 쓰므로, 커넥션은 필요하지 않음.
 	public class SAPB1QueryProvider : QueryProvider
 	{
 		public SAPB1QueryProvider() { }
@@ -19,7 +17,6 @@ namespace Common
 
 			Type elementType = TypeSystem.GetElementType(expression.Type);
 
-			// 실질적인 리더 부분 - recordset으로 대체 필요
 			return Activator.CreateInstance(
 				typeof(SAPB1ObjectReader<>).MakeGenericType(elementType),
 				BindingFlags.Instance | BindingFlags.NonPublic, null,

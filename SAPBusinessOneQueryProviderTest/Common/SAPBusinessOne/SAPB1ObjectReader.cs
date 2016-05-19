@@ -35,7 +35,6 @@ namespace Common
 			return this.GetEnumerator();
 		}
 
-		// TODO: 이 부분을 sap recordset 으로 교체 필요
 		class Enumerator : IEnumerator<T>, IEnumerator, IDisposable
 		{
 			private SAPbobsCOM.Recordset _recordset = SAPCompany.DICompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset) as SAPbobsCOM.Recordset;

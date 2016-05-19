@@ -16,7 +16,7 @@ namespace Common
 			if (provider == null) throw new ArgumentNullException("provider");
 
 			this._provider = provider;
-			this._expression = Expression.Constant(this);
+			this._expression = Expression.Constant(this); // TODO: 이 부분에 SAP B1 Object type을 아예 받아버려야 하나?
 		}
 
 		public Query(QueryProvider provider, Expression expression)

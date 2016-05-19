@@ -5,14 +5,17 @@ using System.Text;
 
 namespace Common
 {
-	internal class QueryTranslator : ExpressionVisitor
+	internal class SAPB1QueryTranslator : ExpressionVisitor
 	{
 		StringBuilder _sb;
+		B1ObjectType _b1ObjectType;
 
-		internal QueryTranslator() { }
+		internal SAPB1QueryTranslator() { }
 
 		internal string Translate(Expression expression)
 		{
+			_b1ObjectType = B1ObjectType.None;
+
 			this._sb = new StringBuilder();
 			this.Visit(expression);
 
@@ -33,8 +36,10 @@ namespace Common
 		{
 			if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Where")
 			{
+				// 여기도 만약 타입이 query 라면 굳이 SELECT * FROM 을 붙일 필요가 있는가?
+				// 하지만, WHERE 절 변환 부분이 걸림
 				_sb.Append("SELECT * FROM(");
-				this.Visit(m.Arguments[0]);
+				this.Visit(m.Arguments[0]); // TODO: 이 부분을 어트리뷰트의 컨텐츠를 불러오도록...
 				_sb.Append(") AS T WHERE ");
 
 				LambdaExpression lambda = (LambdaExpression)StripQuotes(m.Arguments[1]);
@@ -108,8 +113,34 @@ namespace Common
 
 			if (q != null)
 			{
-				_sb.Append("SELECT * FROM ");
-				_sb.Append(q.ElementType.Name);
+				// ElementType 이 어트리뷰트가 지정되어 있게 되면,
+				// 타입에 따라 분기를 태워야 함
+				// 상황에 맞게 SELECT * FROM 을 넣을지 안넣을지 결정
+				//_sb.Append("SELECT * FROM ");
+				//_sb.Append(q.ElementType.Name); // TODO: 여기서 어트리뷰트 받아와야 함.
+
+				// IQueryable 에서 Expression.Constant(this) 로 들어오는 것에서 힌트
+				_b1ObjectType = q.ElementType.GetCustomB1ObjectAttributeValue(x => x.B1ObjectType);
+				string objectContents = q.ElementType.GetCustomB1ObjectAttributeValue(x => x.Contents);
+
+				if (_b1ObjectType == B1ObjectType.Table)
+				{
+					_sb.Append("SELECT * FROM ");
+					_sb.Append(objectContents);
+				}
+				else if (_b1ObjectType == B1ObjectType.CustomQuery)
+				{
+
+				}
+				else if (_b1ObjectType == B1ObjectType.Procedure)
+				{
+
+				}
+				else
+				{
+					_sb.Append("SELECT * FROM ");
+					_sb.Append(objectContents);
+				}
 			}
 			else if (c.Value == null)
 			{
@@ -142,7 +173,16 @@ namespace Common
 		{
 			if (m.Expression != null && m.Expression.NodeType == ExpressionType.Parameter)
 			{
-				_sb.Append(m.Member.Name);
+				// 여기서 어트리뷰트 받기
+				if (_b1ObjectType != B1ObjectType.None)
+				{
+					string fieldName = m.Member.GetCustomFieldAttributeValue(x => x.FieldName);
+					_sb.Append(fieldName);
+				}
+				else
+				{
+					_sb.Append(m.Member.Name);
+				}
 
 				return m;
 			}

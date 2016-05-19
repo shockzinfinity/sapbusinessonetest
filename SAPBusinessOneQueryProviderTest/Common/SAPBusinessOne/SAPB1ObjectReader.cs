@@ -6,11 +6,11 @@ using System.Reflection;
 
 namespace Common
 {
-	internal class ObjectReader<T> : IEnumerable<T>, IEnumerable where T : class, new()
+	internal class SAPB1ObjectReader<T> : IEnumerable<T>, IEnumerable where T : class, new()
 	{
 		Enumerator _enumerator;
 
-		internal ObjectReader(DbDataReader reader)
+		internal SAPB1ObjectReader(DbDataReader reader)
 		{
 			this._enumerator = new Enumerator(reader);
 		}
@@ -31,6 +31,7 @@ namespace Common
 			return this.GetEnumerator();
 		}
 
+		// TODO: 이 부분을 sap recordset 으로 교체 필요
 		class Enumerator : IEnumerator<T>, IEnumerator, IDisposable
 		{
 			DbDataReader _reader;
@@ -43,7 +44,7 @@ namespace Common
 			internal Enumerator(DbDataReader reader)
 			{
 				this._reader = reader;
-				this._fields = typeof(T).GetFields();
+				this._fields = typeof(T).GetFields(); // TODO: DTO 에서 프로퍼티 방식으로 갈 경우, 교체 필요
 			}
 
 			public bool MoveNext()
@@ -52,7 +53,7 @@ namespace Common
 				{
 					if (this._fieldLookup == null)
 					{
-						this.InitFieldLookup();
+						this.InitFieldLookup(); // TODO: 각 필드에 대한 인덱스설정, 쿼리 결과에 인덱스가 동일
 					}
 
 					T instance = new T();
@@ -67,11 +68,11 @@ namespace Common
 
 							if (this._reader.IsDBNull(index))
 							{
-								fi.SetValue(instance, null);
+								fi.SetValue(instance, null); // 여기서 타입에 대한 고민 필요 (형변환 해야하나? 아니면 디폴트로 셋팅해줘야 하나?)
 							}
 							else
 							{
-								fi.SetValue(instance, this._reader.GetValue(index));
+								fi.SetValue(instance, this._reader.GetValue(index)); // 여기서 타입에 대한 고민 필요
 							}
 						}
 					}

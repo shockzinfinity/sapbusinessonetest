@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FF6CF2D6-D666-47A1-8BE9-965B7CB9C493}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{1A930A96-4B3B-4EE3-844C-A7D828D9EE0D}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SAPBusinessOneQueryProviderTest</RootNamespace>
-    <AssemblyName>SAPBusinessOneQueryProviderTest</AssemblyName>
+    <RootNamespace>Common</RootNamespace>
+    <AssemblyName>Common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,17 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="SAPBusinessOne\Attributes.cs" />
+    <Compile Include="SAPBusinessOne\SAPB1QueryProvider.cs" />
+    <Compile Include="DbQueryProvider.cs" />
+    <Compile Include="SAPBusinessOne\SAPB1ObjectReader.cs" />
+    <Compile Include="ObjectReader.cs" />
+    <Compile Include="EmployeeInfo.cs" />
+    <Compile Include="Query.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{1a930a96-4b3b-4ee3-844c-a7d828d9ee0d}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
+    <Compile Include="QueryProvider.cs" />
+    <Compile Include="SAPBusinessOne\SAPB1QueryTranslator.cs" />
+    <Compile Include="QueryTranslator.cs" />
+    <Compile Include="TypeSystem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

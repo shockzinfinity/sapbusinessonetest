@@ -27,9 +27,9 @@ namespace Common
 		[CustomField("type")]
 		public int? type;
 		[CustomField("dept")]
-		public short? dept;
+		public int? dept;
 		[CustomField("branch")]
-		public short? branch;
+		public int? branch;
 		[CustomField("workStreet")]
 		public string workStreet;
 		[CustomField("workBlock")]
@@ -69,11 +69,11 @@ namespace Common
 		[CustomField("status")]
 		public int? status;
 		[CustomField("salary")]
-		public decimal? salary;
+		public double? salary;
 		[CustomField("salaryUnit")]
 		public string salaryUnit;
 		[CustomField("emplCost")]
-		public decimal? emplCost;
+		public double? emplCost;
 		[CustomField("empCostUnt")]
 		public string empCostUnt;
 		[CustomField("termDate")]
@@ -109,7 +109,7 @@ namespace Common
 		[CustomField("martStatus")]
 		public string martStatus;
 		[CustomField("nChildren")]
-		public short? nChildren;
+		public int? nChildren;
 		[CustomField("govID")]
 		public string govID;
 		[CustomField("citizenshp")]
@@ -169,11 +169,11 @@ namespace Common
 		[CustomField("RelPartner")]
 		public string RelPartner;
 		[CustomField("ExemptAmnt")]
-		public decimal? ExemptAmnt;
+		public double? ExemptAmnt;
 		[CustomField("ExemptUnit")]
 		public string ExemptUnit;
 		[CustomField("AddiAmnt")]
-		public decimal? AddiAmnt;
+		public double? AddiAmnt;
 		[CustomField("AddiUnit")]
 		public string AddiUnit;
 		[CustomField("TaxOName")]
@@ -203,9 +203,9 @@ namespace Common
 		[CustomField("LogInstanc")]
 		public int? LogInstanc;
 		[CustomField("UserSign")]
-		public short? UserSign;
+		public int? UserSign;
 		[CustomField("UserSign2")]
-		public short? UserSign2;
+		public int? UserSign2;
 		[CustomField("UpdateDate")]
 		public DateTime? UpdateDate;
 		[CustomField("PersGroup")]
@@ -263,7 +263,7 @@ namespace Common
 		[CustomField("U_GNTEXE")]
 		public string U_GNTEXE;
 		[CustomField("U_KUKJUN")]
-		public decimal? U_KUKJUN;
+		public double? U_KUKJUN;
 		[CustomField("U_RETDAT")]
 		public DateTime? U_RETDAT;
 		[CustomField("U_BOJDAT")]

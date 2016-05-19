@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SAPBusinessOneSDK, Version=1.0.0.1, Culture=neutral, PublicKeyToken=c7c3cb60e45d119f, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -53,6 +54,7 @@
     <Compile Include="QueryProvider.cs" />
     <Compile Include="SAPBusinessOne\SAPB1QueryTranslator.cs" />
     <Compile Include="QueryTranslator.cs" />
+    <Compile Include="SAPBusinessOne\SAPCompany.cs" />
     <Compile Include="TypeSystem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

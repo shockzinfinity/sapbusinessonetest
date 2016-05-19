@@ -18,6 +18,11 @@ namespace Common
 			return requestType.GetProperties().Where(x => x.IsDefined(typeof(T), false)).ToArray();
 		}
 
+		public static FieldInfo[] GetFieldsBySpecific<T>(this Type requestType) where T :Attribute
+		{
+			return requestType.GetFields().Where(x => x.IsDefined(typeof(T), false)).ToArray();
+		}
+
 		public static B1ObjectType GetCustomB1ObjectAttributeValue(this Type t, Func<CustomB1ObjectAttribute, B1ObjectType> expression)
 		{
 			CustomB1ObjectAttribute attribute = t.GetCustomAttribute<CustomB1ObjectAttribute>();
@@ -33,6 +38,13 @@ namespace Common
 		}
 
 		public static string GetCustomFieldAttributeValue(this MemberInfo t, Func<CustomFieldAttribute, string> expression)
+		{
+			CustomFieldAttribute attribute = t.GetCustomAttribute<CustomFieldAttribute>();
+
+			return expression.Invoke(attribute);
+		}
+
+		public static bool GetCustomFieldAttributeValue(this MemberInfo t, Func<CustomFieldAttribute, bool> expression)
 		{
 			CustomFieldAttribute attribute = t.GetCustomAttribute<CustomFieldAttribute>();
 

@@ -9,14 +9,31 @@ namespace Common
 	{
 		StringBuilder _sb;
 
+		// Projectioon 추가로 인해 Translate 메서드 로직 변경
+		ParameterExpression _row;
+		ColumnProjection _projection;
+
 		internal QueryTranslator() { }
 
-		internal string Translate(Expression expression)
+		// Projection 추가로 인해 메서드 시그니처 및 로직 변경
+		//internal string Translate(Expression expression)
+		//{
+		//	this._sb = new StringBuilder();
+		//	this.Visit(expression);
+
+		//	return this._sb.ToString();
+		//}
+		internal TranslateResult Translate(Expression expression)
 		{
 			this._sb = new StringBuilder();
+			this._row = Expression.Parameter(typeof(ProjectionRow), "row"); // TODO: 이 부분 디버그 확인
 			this.Visit(expression);
 
-			return this._sb.ToString();
+			return new TranslateResult
+			{
+				CommandText = this._sb.ToString(),
+				Projector = this._projection != null ? Expression.Lambda(this._projection.Selector, this._row) : null
+			};
 		}
 
 		private static Expression StripQuotes(Expression e)
@@ -29,18 +46,36 @@ namespace Common
 			return e;
 		}
 
+		// Projection 추가로 인해 Select 구문 추가
 		protected override Expression VisitMethodCall(MethodCallExpression m)
 		{
-			if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Where")
+			if (m.Method.DeclaringType == typeof(Queryable))
 			{
-				_sb.Append("SELECT * FROM(");
-				this.Visit(m.Arguments[0]);
-				_sb.Append(") AS T WHERE ");
+				if (m.Method.Name == "Where")
+				{
+					_sb.Append("SELECT * FROM (");
+					this.Visit(m.Arguments[0]);
+					_sb.Append(") AS T WHERE ");
 
-				LambdaExpression lambda = (LambdaExpression)StripQuotes(m.Arguments[1]);
-				this.Visit(lambda.Body);
+					LambdaExpression lambda = (LambdaExpression)StripQuotes(m.Arguments[1]);
+					this.Visit(lambda.Body);
 
-				return m;
+					return m;
+				}
+				else if (m.Method.Name == "Select")
+				{
+					LambdaExpression lambda = (LambdaExpression)StripQuotes(m.Arguments[1]);
+					ColumnProjection projection = new ColumnProjector().ProjectColumns(lambda.Body, this._row);
+
+					_sb.Append("SELECT ");
+					_sb.Append(projection.Columns);
+					_sb.Append(" FROM (");
+					this.Visit(m.Arguments[0]);
+					_sb.Append(") AS T ");
+					this._projection = projection;
+
+					return m;
+				}
 			}
 
 			throw new NotSupportedException(string.Format("The method '{0}' is not supported", m.Method.Name));

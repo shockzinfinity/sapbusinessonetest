@@ -3,15 +3,15 @@
 namespace Common
 {
 	[CustomB1Object(B1ObjectType.Table, "OHEM")]
-	public class EmployeeInfo
+	public class OHEM
 	{
 		[CustomField("empID")]
 		public int empID;
-		//[CustomField("lastName")]
-		//public string lastName;
-		// TEST
 		[CustomField("lastName")]
-		public string sung;
+		public string lastName;
+		// TEST
+		//[CustomField("lastName")]
+		//public string sung;
 		[CustomField("firstName")]
 		public string firstName;
 		[CustomField("middleName")]

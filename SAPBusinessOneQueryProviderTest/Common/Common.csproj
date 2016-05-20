@@ -42,9 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColumnProjection.cs" />
+    <Compile Include="ColumnProjector.cs" />
+    <Compile Include="OHEM.cs" />
     <Compile Include="Evaluator.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="ProjectionReader.cs" />
+    <Compile Include="ProjectionRow.cs" />
     <Compile Include="SAPBusinessOne\Attributes.cs" />
+    <Compile Include="SAPBusinessOne\SAPB1ColumnProjector.cs" />
     <Compile Include="SAPBusinessOne\SAPB1QueryProvider.cs" />
     <Compile Include="DbQueryProvider.cs" />
     <Compile Include="SAPBusinessOne\SAPB1ObjectReader.cs" />
@@ -56,6 +62,8 @@
     <Compile Include="SAPBusinessOne\SAPB1QueryTranslator.cs" />
     <Compile Include="QueryTranslator.cs" />
     <Compile Include="SAPBusinessOne\SAPCompany.cs" />
+    <Compile Include="SAPBusinessOne\SAPB1ProjectionReader.cs" />
+    <Compile Include="TranslateResult.cs" />
     <Compile Include="TypeSystem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

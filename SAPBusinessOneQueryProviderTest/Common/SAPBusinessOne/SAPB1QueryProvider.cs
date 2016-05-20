@@ -12,25 +12,41 @@ namespace Common
 
 		public override object Execute(Expression expression)
 		{
-			string query = this.Translate(expression);
+			// Translate메서드 시그니처 변경
+			TranslateResult result = this.Translate(expression);
+			string query = result.CommandText;
 			// Dispose 는 SAPB1ObjectReader 에서 가져가기로 함.
 
 			Type elementType = TypeSystem.GetElementType(expression.Type);
 
-			return Activator.CreateInstance(
-				typeof(SAPB1ObjectReader<>).MakeGenericType(elementType),
-				BindingFlags.Instance | BindingFlags.NonPublic, null,
-				new object[] { query }, null);
+			if (result.Projector != null)
+			{
+				// 프로젝션
+				Delegate projector = result.Projector.Compile();
+
+				return Activator.CreateInstance(
+					typeof(SAPB1ProjectionReader<>).MakeGenericType(elementType),
+					BindingFlags.Instance | BindingFlags.NonPublic, null,
+					new object[] { query, projector }, null);
+			}
+			else
+			{
+				// 일반
+				return Activator.CreateInstance(
+					typeof(SAPB1ObjectReader<>).MakeGenericType(elementType),
+					BindingFlags.Instance | BindingFlags.NonPublic, null,
+					new object[] { query }, null);
+			}
 		}
 
 		public override string GetQueryText(Expression expression)
 		{
-			return this.Translate(expression);
+			return this.Translate(expression).CommandText;
 		}
 
 		#endregion
 
-		private string Translate(Expression expression)
+		private TranslateResult Translate(Expression expression)
 		{
 			// Evaluator 추가로 인해, expression tree 상의 변수 부분을 대체
 			expression = Evaluator.PartialEval(expression);

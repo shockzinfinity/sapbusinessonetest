@@ -10,16 +10,33 @@ namespace Common
 		StringBuilder _sb;
 		B1ObjectType _b1ObjectType;
 
+		ParameterExpression _row;
+		ColumnProjection _projection;
+
 		internal SAPB1QueryTranslator() { }
 
-		internal string Translate(Expression expression)
+		//internal string Translate(Expression expression)
+		//{
+		//	_b1ObjectType = B1ObjectType.None;
+
+		//	this._sb = new StringBuilder();
+		//	this.Visit(expression);
+
+		//	return this._sb.ToString();
+		//}
+
+		internal TranslateResult Translate(Expression expression)
 		{
 			_b1ObjectType = B1ObjectType.None;
-
 			this._sb = new StringBuilder();
+			this._row = Expression.Parameter(typeof(ProjectionRow), "row");
 			this.Visit(expression);
 
-			return this._sb.ToString();
+			return new TranslateResult
+			{
+				CommandText = this._sb.ToString(),
+				Projector = this._projection != null ? Expression.Lambda(this._projection.Selector, this._row) : null
+			};
 		}
 
 		private static Expression StripQuotes(Expression e)
@@ -34,18 +51,35 @@ namespace Common
 
 		protected override Expression VisitMethodCall(MethodCallExpression m)
 		{
-			if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Where")
+			if (m.Method.DeclaringType == typeof(Queryable))
 			{
-				// 여기도 만약 타입이 query 라면 굳이 SELECT * FROM 을 붙일 필요가 있는가?
-				// 하지만, WHERE 절 변환 부분이 걸림
-				_sb.Append("SELECT * FROM (");
-				this.Visit(m.Arguments[0]); // TODO: 이 부분을 어트리뷰트의 컨텐츠를 불러오도록...
-				_sb.Append(") AS T WHERE ");
+				if (m.Method.Name == "Where")
+				{
+					// 여기도 만약 타입이 query 라면 굳이 SELECT * FROM 을 붙일 필요가 있는가?
+					// 하지만, WHERE 절 변환 부분이 걸림
+					_sb.Append("SELECT * FROM (");
+					this.Visit(m.Arguments[0]); // TODO: 이 부분을 어트리뷰트의 컨텐츠를 불러오도록...(e.g. Contents 에 쿼리를 직접 입력할 경우 고려 필요)
+					_sb.Append(") AS T WHERE ");
 
-				LambdaExpression lambda = (LambdaExpression)StripQuotes(m.Arguments[1]);
-				this.Visit(lambda.Body);
+					LambdaExpression lambda = (LambdaExpression)StripQuotes(m.Arguments[1]);
+					this.Visit(lambda.Body);
 
-				return m;
+					return m;
+				}
+				else if(m.Method.Name == "Select")
+				{
+					LambdaExpression lambda = (LambdaExpression)StripQuotes(m.Arguments[1]);
+					ColumnProjection projection = new SAPB1ColumnProjector().ProjectColumns(lambda.Body, this._row);
+
+					_sb.Append("SELECT ");
+					_sb.Append(projection.Columns);
+					_sb.Append(" FROM (");
+					this.Visit(m.Arguments[0]);
+					_sb.Append(") AS T ");
+					this._projection = projection;
+
+					return m;
+				}
 			}
 
 			throw new NotSupportedException(string.Format("The method '{0}' is not supported", m.Method.Name));
@@ -133,6 +167,10 @@ namespace Common
 
 				}
 				else if (_b1ObjectType == B1ObjectType.Procedure)
+				{
+
+				}
+				else if (_b1ObjectType == B1ObjectType.View)
 				{
 
 				}

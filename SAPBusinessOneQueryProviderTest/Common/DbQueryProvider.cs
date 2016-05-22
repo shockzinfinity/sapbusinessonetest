@@ -20,30 +20,43 @@ namespace Common
 		{
 			TranslateResult result = this.Translate(expression);
 
+			//DbCommand command = this._connection.CreateCommand();
+			////command.CommandText = this.Translate(expression);
+			//command.CommandText = result.CommandText;
+			//DbDataReader reader = command.ExecuteReader();
+			//Type elementType = TypeSystem.GetElementType(expression.Type);
+
+			//if (result.Projector != null)
+			//{
+			//	// projection
+			//	Delegate projector = result.Projector.Compile();
+
+			//	return Activator.CreateInstance(
+			//		typeof(ProjectionReader<>).MakeGenericType(elementType),
+			//		BindingFlags.Instance | BindingFlags.NonPublic, null,
+			//		new object[] { reader, projector }, null);
+			//}
+			//else
+			//{
+			//	// general
+			//	return Activator.CreateInstance(
+			//		typeof(ObjectReader<>).MakeGenericType(elementType),
+			//		BindingFlags.Instance | BindingFlags.NonPublic, null,
+			//		new object[] { reader }, null);
+			//}
+
+			Delegate projector = result.Projector.Compile();
+
 			DbCommand command = this._connection.CreateCommand();
-			//command.CommandText = this.Translate(expression);
 			command.CommandText = result.CommandText;
 			DbDataReader reader = command.ExecuteReader();
+
 			Type elementType = TypeSystem.GetElementType(expression.Type);
 
-			if (result.Projector != null)
-			{
-				// projection
-				Delegate projector = result.Projector.Compile();
-
-				return Activator.CreateInstance(
-					typeof(ProjectionReader<>).MakeGenericType(elementType),
-					BindingFlags.Instance | BindingFlags.NonPublic, null,
-					new object[] { reader, projector }, null);
-			}
-			else
-			{
-				// general
-				return Activator.CreateInstance(
-					typeof(ObjectReader<>).MakeGenericType(elementType),
-					BindingFlags.Instance | BindingFlags.NonPublic, null,
-					new object[] { reader }, null);
-			}
+			return Activator.CreateInstance(
+				typeof(ProjectionReader<>).MakeGenericType(elementType),
+				BindingFlags.Instance | BindingFlags.NonPublic, null,
+				new object[] { reader, projector }, null);
 		}
 
 		public override string GetQueryText(Expression expression)
@@ -62,7 +75,18 @@ namespace Common
 		{
 			expression = Evaluator.PartialEval(expression);
 
-			return new QueryTranslator().Translate(expression);
+			ProjectionExpression projection = (ProjectionExpression)new QueryBinder().Bind(expression);
+			string commandText = new QueryFormatter().Format(projection.Source);
+			LambdaExpression projector = new ProjectionBuilder().Build(projection.Projector);
+
+			//return new QueryTranslator().Translate(expression);
+			return new TranslateResult { CommandText = commandText, Projector = projector };
+		}
+
+		internal class TranslateResult
+		{
+			internal string CommandText;
+			internal LambdaExpression Projector;
 		}
 	}
 }

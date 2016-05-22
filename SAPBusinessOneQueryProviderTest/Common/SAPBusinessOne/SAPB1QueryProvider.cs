@@ -53,5 +53,11 @@ namespace Common
 
 			return new SAPB1QueryTranslator().Translate(expression);
 		}
+
+		internal class TranslateResult
+		{
+			internal string CommandText;
+			internal LambdaExpression Projector;
+		}
 	}
 }

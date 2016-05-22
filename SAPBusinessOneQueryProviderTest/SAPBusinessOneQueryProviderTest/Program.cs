@@ -58,13 +58,34 @@ namespace SAPBusinessOneQueryProviderTest
 					Query<OHEM> employeeInfos = new Query<OHEM>(provider);
 					// projection 추가
 					var query2 = employeeInfos.Where(x => x.lastName == filterLastNames).Select(e => new { Name = e.lastName, eMail = e.email });
-					Console.WriteLine("Query:\n{0}\n", query2);
+					Console.WriteLine("Query2:\n{0}\n", query2);
 
 					var list2 = query2.ToList();
 
 					foreach (var item in list2)
 					{
 						Console.WriteLine("Name: {0}, eMail : {1}", item.Name, item.eMail);
+					}
+
+					// QueryBinder 로 변경 후, Select 와 Where 구문을 위치 변경해도 동작함
+					string countryCode = "KR";
+					var query = employeeInfos.Select(c => new
+					{
+						Name = c.lastName + c.firstName,
+						MobilePhone = new
+						{
+							Country = c.homeCountr,
+							Mobile = c.mobile
+						}
+					})
+					.Where(x => x.MobilePhone.Country == countryCode);
+
+					Console.WriteLine("Query:\n{0}\n", query);
+
+					var list = query.ToList();
+					foreach (var item in list)
+					{
+						Console.WriteLine(item);
 					}
 				}
 			}

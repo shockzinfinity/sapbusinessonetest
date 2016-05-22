@@ -44,11 +44,17 @@
   <ItemGroup>
     <Compile Include="ColumnProjection.cs" />
     <Compile Include="ColumnProjector.cs" />
+    <Compile Include="DbExpressionType.cs" />
+    <Compile Include="DbExpressionVisitor.cs" />
     <Compile Include="OHEM.cs" />
     <Compile Include="Evaluator.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="ProjectedColumns.cs" />
+    <Compile Include="ProjectionBuilder.cs" />
     <Compile Include="ProjectionReader.cs" />
     <Compile Include="ProjectionRow.cs" />
+    <Compile Include="QueryBinder.cs" />
+    <Compile Include="QueryFormatter.cs" />
     <Compile Include="SAPBusinessOne\Attributes.cs" />
     <Compile Include="SAPBusinessOne\SAPB1ColumnProjector.cs" />
     <Compile Include="SAPBusinessOne\SAPB1QueryProvider.cs" />

@@ -2,9 +2,9 @@
 
 namespace Common
 {
-	internal class TranslateResult
-	{
-		internal string CommandText;
-		internal LambdaExpression Projector;
-	}
+	//internal class TranslateResult
+	//{
+	//	internal string CommandText;
+	//	internal LambdaExpression Projector;
+	//}
 }

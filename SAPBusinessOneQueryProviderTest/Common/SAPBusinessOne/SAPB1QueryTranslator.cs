@@ -25,14 +25,15 @@ namespace Common
 		//	return this._sb.ToString();
 		//}
 
-		internal TranslateResult Translate(Expression expression)
+		// 임시로 빌드만을 위해 Common.SAPB1QueryProvider.TranslateResult 클래스 사용
+		internal Common.SAPB1QueryProvider.TranslateResult Translate(Expression expression)
 		{
 			_b1ObjectType = B1ObjectType.None;
 			this._sb = new StringBuilder();
 			this._row = Expression.Parameter(typeof(ProjectionRow), "row");
 			this.Visit(expression);
 
-			return new TranslateResult
+			return new Common.SAPB1QueryProvider.TranslateResult
 			{
 				CommandText = this._sb.ToString(),
 				Projector = this._projection != null ? Expression.Lambda(this._projection.Selector, this._row) : null

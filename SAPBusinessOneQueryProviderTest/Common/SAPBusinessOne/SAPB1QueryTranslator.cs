@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Common
 {
+	[Obsolete]
 	internal class SAPB1QueryTranslator : ExpressionVisitor
 	{
 		StringBuilder _sb;
@@ -25,14 +26,14 @@ namespace Common
 		//	return this._sb.ToString();
 		//}
 
-		internal TranslateResult Translate(Expression expression)
+		internal SAPB1QueryProvider.TranslateResult Translate(Expression expression)
 		{
 			_b1ObjectType = B1ObjectType.None;
 			this._sb = new StringBuilder();
 			this._row = Expression.Parameter(typeof(ProjectionRow), "row");
 			this.Visit(expression);
 
-			return new TranslateResult
+			return new SAPB1QueryProvider.TranslateResult
 			{
 				CommandText = this._sb.ToString(),
 				Projector = this._projection != null ? Expression.Lambda(this._projection.Selector, this._row) : null

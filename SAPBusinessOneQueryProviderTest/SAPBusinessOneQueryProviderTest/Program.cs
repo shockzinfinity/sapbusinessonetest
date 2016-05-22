@@ -55,6 +55,26 @@ namespace SAPBusinessOneQueryProviderTest
 				{
 					Console.WriteLine(item);
 				}
+
+				var query3 = (from c in employeeInfos
+							  select new
+							  {
+								  Name = c.sung + c.name,
+								  MobilePhone = new
+								  {
+									  Country = c.homeCountr,
+									  MobileNumber = c.mobile
+								  }
+							  })
+							 .Where(x => x.MobilePhone.Country == country);
+
+				Console.WriteLine("Query3:\n{0}\n", query3);
+
+				var list3 = query3.ToList();
+				foreach (var item in list3)
+				{
+					Console.Write(item);
+				}
 			}
 			else if (mode == DebugMode.General)
 			{

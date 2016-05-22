@@ -13,7 +13,7 @@ namespace Common
 		[CustomField("lastName")]
 		public string sung;
 		[CustomField("firstName")]
-		public string firstName;
+		public string name;
 		[CustomField("middleName")]
 		public string middleName;
 		[CustomField("sex")]

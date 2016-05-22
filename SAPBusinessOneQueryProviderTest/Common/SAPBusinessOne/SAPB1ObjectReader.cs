@@ -8,7 +8,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Common
 {
-	// 여기서 recordset 에 대한 sap company 연결이 필요함.
+	[Obsolete]
 	internal class SAPB1ObjectReader<T> : IEnumerable<T>, IEnumerable where T : class, new()
 	{
 		Enumerator _enumerator;
@@ -47,7 +47,7 @@ namespace Common
 
 			internal Enumerator(string query)
 			{
-				this._fields = typeof(T).GetFields(); // TODO: DTO 에서 프로퍼티 방식으로 갈 경우, 교체 필요
+				this._fields = typeof(T).GetFields();
 				_recordset.DoQuery(query);
 			}
 

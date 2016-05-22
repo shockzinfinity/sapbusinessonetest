@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Common
 {
+	[Obsolete("QueryBinder, QueryFormatter 로 분리됨")]
 	internal class QueryTranslator : ExpressionVisitor
 	{
 		StringBuilder _sb;
@@ -23,13 +24,13 @@ namespace Common
 
 		//	return this._sb.ToString();
 		//}
-		internal TranslateResult Translate(Expression expression)
+		internal DbQueryProvider.TranslateResult Translate(Expression expression)
 		{
 			this._sb = new StringBuilder();
 			this._row = Expression.Parameter(typeof(ProjectionRow), "row"); // TODO: 이 부분 디버그 확인
 			this.Visit(expression);
 
-			return new TranslateResult
+			return new DbQueryProvider.TranslateResult
 			{
 				CommandText = this._sb.ToString(),
 				Projector = this._projection != null ? Expression.Lambda(this._projection.Selector, this._row) : null
@@ -65,7 +66,9 @@ namespace Common
 				else if (m.Method.Name == "Select")
 				{
 					LambdaExpression lambda = (LambdaExpression)StripQuotes(m.Arguments[1]);
-					ColumnProjection projection = new ColumnProjector().ProjectColumns(lambda.Body, this._row);
+					// 빌드를 위해 추가
+					//ColumnProjection projection = new ColumnProjector().ProjectColumns(lambda.Body, this._row);
+					ColumnProjection projection = null;
 
 					_sb.Append("SELECT ");
 					_sb.Append(projection.Columns);

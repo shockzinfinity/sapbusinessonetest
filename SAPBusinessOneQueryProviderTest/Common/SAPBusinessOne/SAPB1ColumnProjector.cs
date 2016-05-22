@@ -1,9 +1,11 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
 namespace Common
 {
+	[Obsolete]
 	internal class SAPB1ColumnProjector : ExpressionVisitor
 	{
 		StringBuilder _sb;

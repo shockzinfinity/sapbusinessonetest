@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace Common
 {
+	[Obsolete]
 	internal class ObjectReader<T> : IEnumerable<T>, IEnumerable where T : class, new()
 	{
 		Enumerator _enumerator;

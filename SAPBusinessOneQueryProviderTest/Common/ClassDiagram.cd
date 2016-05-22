@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Common.DbQueryProvider" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAEAAAABAA=</HashCode>
+      <FileName>DbQueryProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.EmployeeInfo" Collapsed="true">
+    <Position X="10" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>4DfrasCsRau0DA9kLBVEpwCEWoKNDSAmiNOAo/JgOtI=</HashCode>
+      <FileName>DTOs\EmployeeInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.OHEM" Collapsed="true">
+    <Position X="12" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>4DfrasCsRav0DA9kLBVEpwCEWoKJDSAmiNOAq/JgOtI=</HashCode>
+      <FileName>DTOs\OHEM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.ColumnProjector" Collapsed="true">
+    <Position X="2.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAIAQAIIAEAAAAABAAAAgACEACACAAABA=</HashCode>
+      <FileName>Infrastructure\ColumnProjector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.TableExpression" Collapsed="true">
+    <Position X="12" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAICAAAAIAAAQAAAAAAAQAAAAAAAAAAQAAAAAQAAA=</HashCode>
+      <FileName>Infrastructure\DbExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.ColumnExpression" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAICAAAAIAAAQAABAAAAQEAAAAAAAAAQAAAAAQAAA=</HashCode>
+      <FileName>Infrastructure\DbExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.ColumnDeclaration" Collapsed="true">
+    <Position X="12" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAQAAAAgAAAAAA=</HashCode>
+      <FileName>Infrastructure\DbExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.SelectExpression" Collapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAASAAAIIAAAQAAAAAAAAAAAEAAAAAAQAAACgQAAA=</HashCode>
+      <FileName>Infrastructure\DbExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.ProjectionExpression" Collapsed="true">
+    <Position X="10" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>MAAAACAAAkAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\DbExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.DbExpressionVisitor" Collapsed="true">
+    <Position X="2.75" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAQQAAQAAQAAAAQAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\DbExpressionVisitor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.Evaluator" Collapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\Evaluator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.ReflectionExtensions" Collapsed="true">
+    <Position X="11.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAApAAACAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\Extensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.ProjectedColumns" Collapsed="true">
+    <Position X="7" Y="1.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>MAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Infrastructure\ProjectedColumns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.ProjectionBuilder" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAQAAAAAAAAAAAAAAAAAgAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Infrastructure\ProjectionBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.ProjectionRow" Collapsed="true">
+    <Position X="7" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\ProjectionRow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.Query&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAKAAAAAAAAAhAEAAAAAAAAAAAAAAAEAAAAgAAAgAA=</HashCode>
+      <FileName>Infrastructure\Query.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Common.QueryFormatter" Collapsed="true">
+    <Position X="5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAYwAgAAAAIAAQQAAAkAAAAAABAAAAAAQAA=</HashCode>
+      <FileName>Infrastructure\QueryFormatter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.QueryProvider" Collapsed="true">
+    <Position X="1.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAQQAAAAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\QueryProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Common.TypeSystem" Collapsed="true">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAQAAA=</HashCode>
+      <FileName>Infrastructure\TypeSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.ProjectionReader&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAEAAAAAQAAAAA=</HashCode>
+      <FileName>ProjectionReader.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Common.QueryBinder" Collapsed="true">
+    <Position X="2.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CDCAkIgAAAAxBCAAAIAAAQBACBAAAAAAAEEQAAACEAA=</HashCode>
+      <FileName>QueryBinder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.CustomB1ObjectAttribute" Collapsed="true">
+    <Position X="14" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAACAAABAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>SAPBusinessOne\Attributes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.CustomFieldAttribute" Collapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>SAPBusinessOne\Attributes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.SAPB1ProjectionReader&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="7.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAgAAAAAAAAAAAAAAAEAAAAAQAAAAA=</HashCode>
+      <FileName>SAPBusinessOne\SAPB1ProjectionReader.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Common.SAPB1QueryBinder" Collapsed="true">
+    <Position X="4.75" Y="1.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CDCAkIgAAAAxBCAAAIAAAQBACBAAAAAAAEEQAAACEAA=</HashCode>
+      <FileName>SAPBusinessOne\SAPB1QueryBinder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.SAPB1QueryProvider" Collapsed="true">
+    <Position X="2.75" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>SAPBusinessOne\SAPB1QueryProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.SAPCompany" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAgAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SAPBusinessOne\SAPCompany.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Common.DbExpressionType" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAQAAAAAAAAAAAAAAAQAAQAAA=</HashCode>
+      <FileName>Infrastructure\DbExpression.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Common.B1ObjectType" Collapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAABQAIAAAABAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>SAPBusinessOne\Attributes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

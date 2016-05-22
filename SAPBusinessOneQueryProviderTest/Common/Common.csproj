@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColumnProjection.cs" />
     <Compile Include="Infrastructure\ColumnProjector.cs" />
     <Compile Include="Infrastructure\DbExpression.cs" />
     <Compile Include="Infrastructure\DbExpressionVisitor.cs" />
@@ -57,17 +56,12 @@
     <Compile Include="QueryBinder.cs" />
     <Compile Include="Infrastructure\QueryFormatter.cs" />
     <Compile Include="SAPBusinessOne\Attributes.cs" />
-    <Compile Include="SAPBusinessOne\SAPB1ColumnProjector.cs" />
     <Compile Include="SAPBusinessOne\SAPB1QueryProvider.cs" />
     <Compile Include="DbQueryProvider.cs" />
-    <Compile Include="SAPBusinessOne\SAPB1ObjectReader.cs" />
-    <Compile Include="ObjectReader.cs" />
     <Compile Include="DTOs\EmployeeInfo.cs" />
     <Compile Include="Infrastructure\Query.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\QueryProvider.cs" />
-    <Compile Include="SAPBusinessOne\SAPB1QueryTranslator.cs" />
-    <Compile Include="QueryTranslator.cs" />
     <Compile Include="SAPBusinessOne\SAPCompany.cs" />
     <Compile Include="SAPBusinessOne\SAPB1ProjectionReader.cs" />
     <Compile Include="Infrastructure\TranslateResult.cs" />
